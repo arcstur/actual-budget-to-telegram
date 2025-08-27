@@ -14,3 +14,5 @@ npm start
 * `ACTUAL_URL`: URL of the server hosting your Actual Budget
 * `ACTUAL_PASSWORD`: server's password
 * `ACTUAL_SYNC_ID`: budget's sync id, obtained from settings -> advanced settings
+* `TELEGRAM_BOT_TOKEN`: your Telegram bot's token
+* `TELEGRAM_CHAT_ID`: Telegram chat ID to send messages to
