@@ -1,0 +1,23 @@
+{
+  "name": "actual-budget-to-telegram",
+  "version": "0.0.1",
+  "description": "Telegram bot that sends reports and updates from Actual Budget",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcstur/actual-budget-to-telegram.git"
+  },
+  "author": "arcstur",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/arcstur/actual-budget-to-telegram/issues"
+  },
+  "homepage": "https://github.com/arcstur/actual-budget-to-telegram#readme",
+  "dependencies": {
+    "@actual-app/api": "^25.8.0"
+  }
+}
