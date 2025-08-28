@@ -1,6 +1,8 @@
 import api from '@actual-app/api';
 import axios from 'axios';
+import fs from 'fs';
 
+const CACHE_DIR = process.env.ACTUAL_CACHE_DIR;
 const SERVER_URL = process.env.ACTUAL_URL;
 const PASSWORD = process.env.ACTUAL_PASSWORD;
 const SYNC_ID = process.env.ACTUAL_SYNC_ID;
@@ -10,8 +12,13 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const reportMessages = [];
 
 async function main() {
+  if (!fs.existsSync(CACHE_DIR)) {
+    console.log(`${CACHE_DIR} does not exist, creating directory...`);
+    fs.mkdirSync(CACHE_DIR, { recursive: true });
+  }
+
   await api.init({
-    dataDir: './cache',
+    dataDir: CACHE_DIR,
     serverURL: SERVER_URL,
     password: PASSWORD,
   });
@@ -21,7 +28,7 @@ async function main() {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const budgetMonth = `${year}-${month}`;
-  const monthPrint = date.toLocaleDateString('pt-BR', {year: "numeric", month: "long"});
+  const monthPrint = date.toLocaleDateString('pt-BR', { year: "numeric", month: "long" });
   console.log(`Obtaining budget of ${budgetMonth}`);
   addMessage(`== ${monthPrint} ==\n`)
 
@@ -34,7 +41,7 @@ async function main() {
 };
 
 function processToBudget(budget) {
-  if (budget.toBudget > 0 ) {
+  if (budget.toBudget > 0) {
     addMessage(`[To Budget] ${printMoney(budget.toBudget)}`);
   };
 };
