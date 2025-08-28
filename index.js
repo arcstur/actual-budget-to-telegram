@@ -2,6 +2,7 @@ import api from '@actual-app/api';
 import axios from 'axios';
 import fs from 'fs';
 
+// TODO: check if they exist
 const CACHE_DIR = process.env.ACTUAL_CACHE_DIR;
 const SERVER_URL = process.env.ACTUAL_URL;
 const PASSWORD = process.env.ACTUAL_PASSWORD;
@@ -64,6 +65,7 @@ function addMessageRaw(message) {
 
 
 async function sendFinalMessage() {
+  // TODO: don't send the same message twice
   let finalMessage = reportMessages.join("\n");
   const postData = {
     chat_id: TELEGRAM_CHAT_ID,
