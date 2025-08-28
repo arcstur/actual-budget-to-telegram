@@ -35,6 +35,7 @@ async function main() {
   let budget = await api.getBudgetMonth(budgetMonth);
   processToBudget(budget);
   processCategories(budget);
+  processForNextMonth(budget);
 
   await api.shutdown();
   await sendFinalMessage();
@@ -43,6 +44,12 @@ async function main() {
 function processToBudget(budget) {
   if (budget.toBudget > 0) {
     addMessage(`[To Budget] ${printMoney(budget.toBudget)}`);
+  };
+};
+
+function processForNextMonth(budget) {
+  if (budget.forNextMonth > 0) {
+    addMessage(`[For Next Month] ${printMoney(budget.forNextMonth)}`);
   };
 };
 
