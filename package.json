@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env index.js"
+    "build": "npm install"
+  },
+  "bin": {
+    "actual-budget-to-telegram": "index.js"
   },
   "repository": {
     "type": "git",
