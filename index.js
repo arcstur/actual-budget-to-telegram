@@ -30,48 +30,38 @@ async function main() {
   const budgetMonth = `${year}-${month}`;
   const monthPrint = date.toLocaleDateString('pt-BR', { year: "numeric", month: "long" });
   console.log(`Obtaining budget of ${budgetMonth}`);
-  addMessage(`== ${monthPrint} ==\n`)
+  addMessageRaw(`== ${monthPrint} ==\n`)
 
   let budget = await api.getBudgetMonth(budgetMonth);
-  processToBudget(budget);
+  addMessageMoney(budget.toBudget, "[To Budget]");
   processCategories(budget);
-  processForNextMonth(budget);
+  addMessageMoney(budget.forNextMonth, "[For Next Month]");
 
   await api.shutdown();
   await sendFinalMessage();
 };
 
-function processToBudget(budget) {
-  if (budget.toBudget > 0) {
-    addMessage(`[To Budget] ${printMoney(budget.toBudget)}`);
-  };
-};
-
-function processForNextMonth(budget) {
-  if (budget.forNextMonth > 0) {
-    addMessage(`[For Next Month] ${printMoney(budget.forNextMonth)}`);
-  };
-};
-
 function processCategories(budget) {
   for (const categoryGroup of budget.categoryGroups) {
     for (const category of categoryGroup.categories) {
-      if (category.balance > 0) {
-        addMessage(`[${categoryGroup.name}] [${category.name}] ${printMoney(category.balance)}`);
-      };
+      addMessageMoney(category.balance, `[${categoryGroup.name}] [${category.name}]`);
     };
   };
 };
 
-function printMoney(value) {
-  const number = (value / 100).toFixed(2);
-  return `R$ ${number}`;
+function addMessageMoney(value, title) {
+  if (value > 0) {
+    const printed = (value / 100).toFixed(2);
+    const message = `${title} R$ ${printed}`;
+    addMessageRaw(message);
+  }
 }
 
-function addMessage(message) {
+function addMessageRaw(message) {
   reportMessages.push(message);
   console.log(`Message: ${message}`);
 }
+
 
 async function sendFinalMessage() {
   let finalMessage = reportMessages.join("\n");
