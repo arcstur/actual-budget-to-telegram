@@ -59,7 +59,6 @@ function addMessageMoney(value, title) {
 
 function addMessageRaw(message) {
   reportMessages.push(message);
-  console.log(`Message: ${message}`);
 }
 
 
