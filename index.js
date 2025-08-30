@@ -2,13 +2,12 @@ import api from '@actual-app/api';
 import axios from 'axios';
 import fs from 'fs';
 
-// TODO: check if they exist
-const CACHE_DIR = process.env.ACTUAL_CACHE_DIR;
-const SERVER_URL = process.env.ACTUAL_URL;
-const PASSWORD = process.env.ACTUAL_PASSWORD;
-const SYNC_ID = process.env.ACTUAL_SYNC_ID;
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const CACHE_DIR = getEnv("ACTUAL_CACHE_DIR");
+const SERVER_URL = getEnv("ACTUAL_URL");
+const PASSWORD = getEnv("ACTUAL_PASSWORD");
+const SYNC_ID = getEnv("ACTUAL_SYNC_ID");
+const TELEGRAM_BOT_TOKEN = getEnv("TELEGRAM_BOT_TOKEN");
+const TELEGRAM_CHAT_ID = getEnv("TELEGRAM_CHAT_ID");
 
 const reportMessages = [];
 
@@ -74,6 +73,14 @@ async function sendFinalMessage() {
   const apiEndpoint = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
   console.log("Sending final message through Telegram...");
   await axios.post(apiEndpoint, postData);
+}
+
+function getEnv(name) {
+  let variable = process.env[name];
+  if (!variable) {
+    throw Error(`environment variable "${name}" not present`);
+  };
+  return variable;
 }
 
 await main();
