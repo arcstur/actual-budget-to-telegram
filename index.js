@@ -35,7 +35,6 @@ async function main() {
   let budget = await api.getBudgetMonth(budgetMonth);
   addMessageMoney(budget.toBudget, "[To Budget]");
   processCategories(budget);
-  addMessageMoney(budget.forNextMonth, "[For Next Month]");
 
   await api.shutdown();
   await sendFinalMessage();
