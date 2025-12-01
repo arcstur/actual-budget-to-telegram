@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/arcstur/actual-budget-to-telegram#readme",
   "dependencies": {
-    "@actual-app/api": "^25.8.0",
+    "@actual-app/api": "^25.11.0",
     "axios": "^1.11.0"
   }
 }
