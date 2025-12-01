@@ -13,7 +13,7 @@
       pname = "actual-budget-to-telegram";
       version = "0.0.1";
       src = ./.;
-      npmDepsHash = "sha256-w/y3krjTRRsb+NjDzURhefdKSd6TJMzd/FeCz56STYw=";
+      npmDepsHash = "sha256-T+HMETP8RNmanTee4k0fVdRdRHgTY7zE2irzmtj996U=";
 
       meta = with pkgs.lib; {
         mainProgram = "actual-budget-to-telegram";
